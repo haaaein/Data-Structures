@@ -14,20 +14,10 @@ void printScore(Score *p)
 
 Score *biggerScore(Score *p1, Score *p2)
 {
-    Score *temp;
-    temp = (Score *)malloc(sizeof(Score));
-
-    if (p1->midterm > p2->midterm)
-        temp->midterm = p1->midterm;
+    if (p1->midterm + p1->final > p2->midterm + p2->final)
+        return p1;
     else
-        temp->midterm = p2->midterm;
-
-    if (p1->final > p2->final)
-        temp->final = p1->final;
-    else
-        temp->final = p2->final;
-
-    return temp;
+        return p2;
 }
 
 Score *totalScore(Score *p1, Score *p2)
