@@ -178,7 +178,6 @@ ListNode* insert_pos(ListNode *head, int pos, element value)
 {
     ListNode *p = head;
     ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
-    pos = pos - 1;
     
     for (int i = 0; i < pos - 1; i++)
         p = p->link;
@@ -194,7 +193,7 @@ ListNode* insert_pos(ListNode *head, int pos, element value)
 ListNode* delete_pos(ListNode *head, int pos)
 {
     int i;
-    pos = pos - 1;
+   
     ListNode *temp = head;
     
     if (get_length(head) - 1 < pos) {
@@ -216,7 +215,7 @@ ListNode* delete_pos(ListNode *head, int pos)
 void print_line(ListNode *head, int num)
 {
     ListNode *p = head;
-    num = num - 1;
+    
     if (p == NULL || (num < 0 || num > get_length(head)))
         printf("출력할 텍스트가 없습니다.\n");
     
@@ -265,19 +264,19 @@ int main(void)
                 printf("삽입할 라인: ");
                 fflush(stdin);
                 fgets(newElement.line, MAX_CHAR_PER_LINE, stdin);
-                list = insert_pos(list, lineNb, newElement);
+                list = insert_pos(list, lineNb - 1, newElement);
                 display_text(list);
                 break;
             case 'd':
                 printf("삭제할 라인 번호: ");
                 scanf("%d", &lineNb);
-                list = delete_pos(list, lineNb);
+                list = delete_pos(list, lineNb - 1);
                 display_text(list);
                 break;
             case 'v':
                 printf("출력할 라인 번호: ");
                 scanf("%d", &lineNb);
-                print_line(list, lineNb);
+                print_line(list, lineNb - 1);
                 break;
             case 'p':
                 display_text(list);
