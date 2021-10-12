@@ -196,11 +196,6 @@ ListNode* delete_pos(ListNode *head, int pos)
    
     ListNode *temp = head;
     
-    if (get_length(head) - 1 < pos) {
-        printf("잘못된 pos");
-        return head;
-    }
-    
     if (pos == 0)
         head = delete_first(head);
     
@@ -260,7 +255,6 @@ int main(void)
             case 'i':
                 printf("삽입할 라인 번호: ");
                 scanf("%d", &lineNb);
-                
                 printf("삽입할 라인: ");
                 fflush(stdin);
                 fgets(newElement.line, MAX_CHAR_PER_LINE, stdin);
