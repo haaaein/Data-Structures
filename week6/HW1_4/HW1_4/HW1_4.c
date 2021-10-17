@@ -81,8 +81,7 @@ ListNode* delete_first(ListNode* head)
 
 ListNode* delete_last(ListNode* head)
 {
-    ListNode *temp = head->link;
-    ListNode *prevTemp = NULL;
+    ListNode *removed, *pre;
     
     if (head == NULL) {
         printf("리스트가 비어 삭제를 못함\n");
@@ -90,21 +89,21 @@ ListNode* delete_last(ListNode* head)
     }
 
     if (head == head->link) {//노드가 1개
-        free(head);
+        removed = head;
         head = NULL;
     }
     
     else {
-        while (temp != head) {
-            prevTemp = temp;
-            temp = temp->link;
+        pre = head->link;
+        while (head != pre->link) {
+            pre = pre->link;
         }
     
-        prevTemp->link = temp->link;
-        head = prevTemp;
-        free(temp);
+        removed = head;
+        pre->link = removed->link;
+        head = pre;
     }
-    
+    free(removed);
     return head;
 }
 
@@ -133,20 +132,18 @@ ListNode* search(ListNode *head, element data)
 
 int get_size(ListNode* head)
 {
-    int first;
+    list* p;
     int size = 0;
     
     if (head == NULL)
         size = 0;
     
-    else {
-        first = head->data;
-        do {
-            size++;
-            head = head->link;
-        } while (head->data != first);
-    }
-    
+    p = head->link;
+    do {
+        size++;
+        p = p->size;
+    } while(p != head);
+    size++;
     return size;
 }
 

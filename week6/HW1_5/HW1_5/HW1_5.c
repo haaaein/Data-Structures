@@ -51,10 +51,7 @@ void ddelete(DListNode* head, DListNode* removed)
 
 void print_reverse_dlist(DListNode* phead)
 {
-    DListNode* p = phead->rlink;
-    
-    while (p != phead)
-        p = p->rlink;
+    DListNode* p;
     
     for (p = phead->llink; p != phead; p = p->llink)
         printf("<- |%d| |->", p->data);

@@ -114,7 +114,7 @@ ListNode *search(ListNode *head, element x)
     ListNode *p;
     p = head;
     while (p != NULL) {
-        if (strcmp(p->data.line, x.line))
+        if (strcmp(p->data.line, x.line)) //p->date.line == x.line
             return p;
         p = p->link;
     }
