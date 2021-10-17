@@ -8,6 +8,7 @@ typedef struct TreeNode {
 } TreeNode;
 
 typedef TreeNode* element;
+
 typedef struct StackNode {
     element data;
     struct StackNode* link;
@@ -104,15 +105,28 @@ TreeNode* insert_node(TreeNode* root, int data)
 
 void inorder_iter(LinkedStackType* s, TreeNode* root)
 {
-    while (1) {
-        for (; root; root = root->left)
-            push(root, s->top->data);
-        root = pop(s);
-        if (!root) break;
-        printf("[%d] ", root->data);
-        root = root->right;
-        s = root;
-    }
+    /** 재귀
+     if (root)  {
+         inorder_iter(s, root->left);
+         printf("%d ", root->data);
+         inorder_iter(s, root->right);
+     }
+     */
+    
+     while(1) {
+         for (; root; root = root->left)
+             push(s, root);
+         
+         if (is_empty(s))
+             break;
+         else
+             root = pop(s);
+         
+         printf("[%d] ", root->data);
+         
+         root = root->right;
+     }
+     return;
     
 }
 
@@ -133,7 +147,7 @@ int main(void)// 변경하지 말라.
     TreeNode n5 = { 20, &n3,  &n4 };
     TreeNode n6 = { 15, &n2,  &n5 };
     root = &n6;
-
+    
     // (프로스쿨 사용을 위한 설명)
     // 아래의 6줄은 프로스쿨에 올릴때 주석처리를 삭제해주세요.트리를 만들기 위한 부분입니다.
     /*
@@ -146,7 +160,7 @@ int main(void)// 변경하지 말라.
     */
     
     init(&s);
-    printf("중위 순회=");
+    //printf("중위 순회=");
     inorder_iter(&s, root);
     printf("\n");
     return 0;

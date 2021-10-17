@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#define MAX_STRING_SIZE 100
 
-typedef int element;
-typedef char* string;
+typedef struct {
+    char str[MAX_STRING_SIZE];
+    int num;
+} element;
 
 typedef struct StackNode {
-    element data;
-    string strNum;
+    element item;
     struct StackNode *link;
 } StackNode;
 
@@ -29,16 +32,16 @@ int is_full(LinkedStackType *s)
     return 0;
 }
 
-void push(LinkedStackType *s, element data, string str)
+void push(LinkedStackType *s, element data)
 {
     StackNode *temp = (StackNode *)malloc(sizeof(StackNode));
+    
     if (temp == NULL) {
         fprintf(stderr, "메모리 할당 에러\n");
         return;
     }
     else {
-        temp->data = data;
-        temp->strNum = str;
+        temp->item = data;
         temp->link = s->top;
         s->top = temp;
     }
@@ -50,7 +53,7 @@ void stack_print(LinkedStackType *s)
         printf("<empty>\n");
     
     for (StackNode *p = s->top; p != NULL; p = p->link) {
-        printf("[%d, %s] ", p->data, p->strNum);
+        printf("[%d, %s] ", p->item.num, p->item.str);
         if (p == s->top)
             printf(" <- top");
         printf("\n");
@@ -58,7 +61,7 @@ void stack_print(LinkedStackType *s)
     printf("--\n");
 }
 
-void pop(LinkedStackType *s)
+element pop(LinkedStackType *s)
 {
     if(is_empty(s)) {
         fprintf(stderr, "스택이 비어있음\n");
@@ -66,10 +69,10 @@ void pop(LinkedStackType *s)
     }
     else {
         StackNode *temp = s->top;
-        element data = temp->data;
-        string str = temp->strNum;
+        element item = temp->item;
         s->top = s->top->link;
         free(temp);
+        return item;
     }
 }
 
@@ -80,30 +83,42 @@ element peek(LinkedStackType *s)
         exit(1);
     }
     else {
-        return s->top->data;
+        return s->top->item;
     }
 }
 
 int main(void)
 {
     LinkedStackType s;
+    element item;
     
     init(&s);
     stack_print(&s);
-    push(&s, 10, "ten");
+    item.num = 10;
+    strcpy(item.str, "ten");
+    push(&s, item);
     stack_print(&s);
-    push(&s, 20, "twenty");
+    
+    item.num = 20;
+    strcpy(item.str, "twenty");
+    push(&s, item);
     stack_print(&s);
-    push(&s, 30, "thirty");
+    
+    item.num = 30;
+    strcpy(item.str, "thirty");
+    push(&s, item);
     stack_print(&s);
-    push(&s, 40, "forty");
+    
+    item.num = 40;
+    strcpy(item.str, "forty");
+    push(&s, item);
     stack_print(&s);
     
     pop(&s);
     stack_print(&s);
-    push(&s, 50, "fifty");
-    stack_print(&s);
-    pop(&s);
+    item.num = 50;
+    strcpy(item.str, "fifty");
+    push(&s, item);
     stack_print(&s);
     pop(&s);
     stack_print(&s);
