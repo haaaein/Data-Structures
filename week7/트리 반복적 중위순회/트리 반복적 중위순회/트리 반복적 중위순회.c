@@ -1,3 +1,4 @@
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -105,14 +106,6 @@ TreeNode* insert_node(TreeNode* root, int data)
 
 void inorder_iter(LinkedStackType* s, TreeNode* root)
 {
-    /** 재귀
-     if (root)  {
-         inorder_iter(s, root->left);
-         printf("%d ", root->data);
-         inorder_iter(s, root->right);
-     }
-     */
-    
      while(1) {
          for (; root; root = root->left)
              push(s, root);
@@ -150,14 +143,14 @@ int main(void)// 변경하지 말라.
     
     // (프로스쿨 사용을 위한 설명)
     // 아래의 6줄은 프로스쿨에 올릴때 주석처리를 삭제해주세요.트리를 만들기 위한 부분입니다.
-    /*
-    root = NULL;
-    scanf("%d", &n);
-    while (n != -1) {
-        root = insert_node(root, n);
-        scanf("%d", &n);
-    }
-    */
+    //
+    //root = NULL;
+    //scanf("%d", &n);
+    //while (n != -1) {
+        //root = insert_node(root, n);
+        //scanf("%d", &n);
+    //}
+    //
     
     init(&s);
     //printf("중위 순회=");
@@ -165,3 +158,4 @@ int main(void)// 변경하지 말라.
     printf("\n");
     return 0;
 }
+*/

@@ -14,10 +14,10 @@
             filePath = "&#x1110;&#x1173;&#x1105;&#x1175; &#x1107;&#x1161;&#x11ab;&#x1107;&#x1169;&#x11a8;&#x110c;&#x1165;&#x11a8; &#x110c;&#x116e;&#x11bc;&#x110b;&#x1171;&#x1109;&#x116e;&#x11ab;&#x1112;&#x116c;/&#x1110;&#x1173;&#x1105;&#x1175; &#x1107;&#x1161;&#x11ab;&#x1107;&#x1169;&#x11a8;&#x110c;&#x1165;&#x11a8; &#x110c;&#x116e;&#x11bc;&#x110b;&#x1171;&#x1109;&#x116e;&#x11ab;&#x1112;&#x116c;.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "is_full(s)"
-            landmarkType = "9">
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,10 +30,10 @@
             filePath = "&#x1110;&#x1173;&#x1105;&#x1175; &#x1107;&#x1161;&#x11ab;&#x1107;&#x1169;&#x11a8;&#x110c;&#x1165;&#x11a8; &#x110c;&#x116e;&#x11bc;&#x110b;&#x1171;&#x1109;&#x116e;&#x11ab;&#x1112;&#x116c;/&#x1110;&#x1173;&#x1105;&#x1175; &#x1107;&#x1161;&#x11ab;&#x1107;&#x1169;&#x11a8;&#x110c;&#x1165;&#x11a8; &#x110c;&#x116e;&#x11bc;&#x110b;&#x1171;&#x1109;&#x116e;&#x11ab;&#x1112;&#x116c;.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "main()"
-            landmarkType = "9">
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

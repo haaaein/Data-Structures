@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4176A2BB271590D9004110E6 /* 트리 반복적 중위순회.c in Sources */ = {isa = PBXBuildFile; fileRef = 4176A2BA271590D9004110E6 /* 트리 반복적 중위순회.c */; };
+		4176A2C4271C03CE004110E6 /* 트리 중위순회 재귀.c in Sources */ = {isa = PBXBuildFile; fileRef = 4176A2C3271C03CE004110E6 /* 트리 중위순회 재귀.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		4176A2B7271590D9004110E6 /* 트리 반복적 중위순회 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "트리 반복적 중위순회"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4176A2BA271590D9004110E6 /* 트리 반복적 중위순회.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "트리 반복적 중위순회.c"; sourceTree = "<group>"; };
+		4176A2C3271C03CE004110E6 /* 트리 중위순회 재귀.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "트리 중위순회 재귀.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +43,7 @@
 		4176A2AE271590D9004110E6 = {
 			isa = PBXGroup;
 			children = (
+				4176A2C1271C03AF004110E6 /* 트리 중위순회 재귀 */,
 				4176A2B9271590D9004110E6 /* 트리 반복적 중위순회 */,
 				4176A2B8271590D9004110E6 /* Products */,
 			);
@@ -60,6 +63,15 @@
 				4176A2BA271590D9004110E6 /* 트리 반복적 중위순회.c */,
 			);
 			path = "트리 반복적 중위순회";
+			sourceTree = "<group>";
+		};
+		4176A2C1271C03AF004110E6 /* 트리 중위순회 재귀 */ = {
+			isa = PBXGroup;
+			children = (
+				4176A2C3271C03CE004110E6 /* 트리 중위순회 재귀.c */,
+			);
+			name = "트리 중위순회 재귀";
+			path = "트리 중위순회 재귀";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4176A2BB271590D9004110E6 /* 트리 반복적 중위순회.c in Sources */,
+				4176A2C4271C03CE004110E6 /* 트리 중위순회 재귀.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
