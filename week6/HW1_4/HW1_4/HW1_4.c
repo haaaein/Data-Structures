@@ -132,7 +132,7 @@ ListNode* search(ListNode *head, element data)
 
 int get_size(ListNode* head)
 {
-    list* p;
+    ListNode *p;
     int size = 0;
     
     if (head == NULL)
@@ -141,7 +141,7 @@ int get_size(ListNode* head)
     p = head->link;
     do {
         size++;
-        p = p->size;
+        p = p->link;
     } while(p != head);
     size++;
     return size;
