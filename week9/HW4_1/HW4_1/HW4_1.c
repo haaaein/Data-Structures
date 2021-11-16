@@ -28,93 +28,76 @@ TreeNode m6={15, &m2, &m5};
 TreeNode *root2= &m6;
 
 int get_nonleaf_count(TreeNode *t) {
-    int count = 0;
-    if (t != NULL) {
-        if (t->left == NULL && t->right == NULL)
-            return 0;
-        else
-            count = 1 + get_nonleaf_count(t->left) + get_nonleaf_count(t->right);
-    }
-    return count;
+    if (t == NULL)
+        return 0;
+    else if ((t->right == NULL) && (t->left == NULL))
+        return 0;
+    else
+        return (1 + get_nonleaf_count(t->left) + get_nonleaf_count(t->right));
 }
 
-int equal(TreeNode *t1, TreeNode *t2) {
-    if((t1 == NULL) && (t2 == NULL))
+int equal(TreeNode *t1, TreeNode *t2)
+{
+    if(t1 == NULL && t2 == NULL)
         return 1;
     
-    else if((t1 != NULL) && (t2 != NULL)) {
-        if(equal(t1->left, t2->left)) {
-            if(equal(t1->right, t2->right)) {
-                if(t1->data == t2->data)
-                    return 1;
-            }
-        }
-    }
-    return 0;
+    else if(t1 == NULL || t2 == NULL)
+        return 0;
+    else if (t1->data != t2->data)
+        return 0;
+    else
+        return equal(t1->left, t2->left) && equal(t1->right, t2->right);
+    
 }
 
-int get_oneleaf_count(TreeNode *t) {
-    int count = 0;
-    if (t != NULL) {
-        if (t->left == NULL && t->right != NULL)
-            count = 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
-        else if (t->right == NULL && t->left != NULL)
-            count = 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
-        else
-            return 0;
-    }
-    return count;
+int get_oneleaf_count(TreeNode *t)
+{
+    if (t == NULL)
+        return 0;
+    else if (t->left == NULL && t->right == NULL)
+        return 0;
+    else if (t->left == NULL)
+        return 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
+    else if (t->right == NULL)
+        return 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
+    else
+        return get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
 }
 
-int get_twoleaf_count(TreeNode *t) {
-    int count = 0;
-    if (t != NULL) {
-        if (t->left != NULL && t->right != NULL)
-            count = 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
-        else
-            return 0;
-    }
-    return count;
+int get_twoleaf_count(TreeNode *t)
+{
+    if (t == NULL)
+        return 0;
+    else if (t->left == NULL && t->right == NULL)
+        return 0;
+    else if (t->left == NULL)
+        return get_twoleaf_count(t->left) + get_twoleaf_count(t->right);
+    else if (t->right == NULL)
+        return get_twoleaf_count(t->left) + get_twoleaf_count(t->right);
+    else
+        return 1 + get_twoleaf_count(t->left) + get_twoleaf_count(t->right);
 }
 
-int get_max(TreeNode *t) {
-    int root, left, right, max = -1;
-    if (t != NULL) {
-        root = t->data;
-        left = get_max(t->left);
-        right = get_max(t->right);
-        
-        if (left > right)
-            max = left;
-        else
-            max = right;
-        
-        if (root > max)
-            max = root;
-    }
-    return max;
+int get_max(TreeNode *t)
+{
+    if (t)
+        return fmax(fmax(t->data, get_max(t->left)), get_max(t->right));
+    else
+        return -1;
 }
 
-int get_min(TreeNode *t) {
-    int root, left, right, min = 999;
-    if (t != NULL) {
-        root = t->data;
-        left = get_min(t->left);
-        right = get_min(t->right);
-        
-        if (left < right)
-            min = left;
-        else
-            min = right;
-        
-        if (root < min)
-            min = root;
-    }
-    return min;
+int get_min(TreeNode *t)
+{
+    if (t)
+        return fmin(fmin(t->data, get_max(t->left)), get_max(t->right));
+    else
+        return 999;
 }
 
 void node_increase(TreeNode *t) {
-    if (t != NULL) {
+    if (t == NULL)
+        return;
+    else {
         t->data ++;
         node_increase(t->left);
         node_increase(t->right);

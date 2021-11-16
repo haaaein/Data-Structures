@@ -47,18 +47,16 @@ TreeNode * min_value_node(TreeNode * node)
 
 int get_minimum(TreeNode *node)
 {
-    TreeNode * current = node;
-    while (current->left != NULL)
-        current = current->left;
-    return current->key;
+    while (node->left != NULL)
+        node = node->left;
+    return node->key;
 }
 
 int get_maximum(TreeNode *node)
 {
-    TreeNode * current = node;
-    while (current->right != NULL)
-        current = current->right;
-    return current->key;
+    while (node->right != NULL)
+        node = node->right;
+    return node->key;
 }
 
 TreeNode * delete_node (TreeNode * root, int key)
@@ -111,14 +109,14 @@ int get_node_count(TreeNode* root)
 
 int get_height(TreeNode *root)
 {
-    if (!root)
-        return 0;
+    int height = 0;
     
-    else {
-        int left_h = get_height(root->left);
-        int right_h = get_height(root->right);
-        return 1 + (left_h > right_h ? left_h : right_h);
+    if (root != NULL) {
+        height = max(get_height(root->left) , get_height(root->right));
+        //return 1 + (left_h > right_h ? left_h : right_h);
     }
+    return height;
+    
 }
 
 char askChoice(void)
