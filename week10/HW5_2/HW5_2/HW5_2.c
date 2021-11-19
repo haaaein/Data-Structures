@@ -50,23 +50,23 @@ element delete_max_heap(HeapType* h)
     return item;
 }
 
-HeapType* read_heap(HeapType *h, char *filename)
+void read_heap(HeapType *h, char *filename)
 {
+    int n;
+    element e;
     FILE* fp = fopen(filename, "r");
     
     if(fp == NULL) {
-        printf("파일 열기 실패\n");
-        return NULL;
+        printf("파일 %s 열기 실패\n", filename);
+        return;
     }
     
-    int i = 1;
-    while (fscanf(fp, "%d ", &h->heap[i].key) != EOF) {
-        insert_max_heap(h, h->heap[i]);
-        i++;
+    while (fscanf(fp, "%d\n", &n) != EOF) {
+        e.key = n;
+        insert_max_heap(h, e);
     }
    
     fclose(fp);
-    return h;
 }
 
 void write_heap_array(HeapType *h, char *filename)
@@ -80,7 +80,7 @@ void write_heap_array(HeapType *h, char *filename)
     
     else {
         for (int i = 1; i <= h->heap_size; i++)
-            fprintf(fp, "%d ", h->heap[i].key);
+            fprintf(fp, "%d\n", h->heap[i].key);
         fclose(fp);
     }
 }
@@ -94,7 +94,8 @@ void write_descending_order(HeapType h, char *filename)
         return;
     }
     
-    for (int i = 1; i <= h.heap_size; i++)
+    int size = h.heap_size;
+    for (int i = 1; i <= size; i++)
         fprintf(fp, "%d ", delete_max_heap(&h).key);
     
     fclose(fp);

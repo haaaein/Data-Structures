@@ -62,12 +62,14 @@ void read_graph(GraphType *g, char *filename)
 
 void dfs_mat(GraphType *g, int v)
 {
-     int w;
-     visited[v] = 1;
-     for (w = 0; w < g->n; w++)
-          if ((g->adj_mat[v][w] == 1) && (visited[w] == 0)) {
-               dfs_mat(g, w);
-          }
+    int w;
+    visited[v] = 1;
+    
+    for (w = 0; w < g->n; w++)
+        if ((g->adj_mat[v][w] == 1) && (visited[w] == 0)) {
+            printf("<%d %d>\n", v, w);
+            dfs_mat(g, w);
+        }
 }
 int main(void)
 {

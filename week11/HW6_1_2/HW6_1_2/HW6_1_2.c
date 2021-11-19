@@ -22,27 +22,25 @@ void graph_init(GraphType *g)
         g->adj_list[v]=NULL;
 }
 
-// ∞£º± ª¿‘ ø¨ªÍ, v∏¶ u¿« ¿Œ¡¢ ∏ÆΩ∫∆Æø° ª¿‘«—¥Ÿ.
 void insert_edge(GraphType *g, int u, int v)
 {
     GraphNode *node_u, *node_v;
     if( u >= g->n || v >= g->n ){
-        fprintf(stderr, "±◊∑°«¡: ¡§¡° π¯»£ ø¿∑˘");
+        fprintf(stderr, "그래프 : 정점 번호 오류");
         return;
     }
     node_u = (GraphNode *)malloc(sizeof(GraphNode));
     if (node_u == NULL) {
-        fprintf(stderr, "∏ﬁ∏∏Æ «“¥Á ø°∑Ø!\n"); return;
+        fprintf(stderr, "에러!\n"); return;
     }
      
-     // ƒ⁄µÂ ª¿‘
 }
 
-void remove_node(GraphNode **phead, element item) { // 4¿Â ∏ÆΩ∫∆Æø°º≠ «–Ω¿«— «‘ºˆø°º≠ ListNode --> GraphNode∑Œ ∫Ø∞Ê«ﬂ¿Ω
+void remove_node(GraphNode **phead, element item) {
      GraphNode *p, *prevp;
      
      if (*phead == NULL)
-          printf("∏ÆΩ∫∆Æ¥¬ ∫ÒæÓ¿÷Ω¿¥œ¥Ÿ.\n");
+          printf("삭제할 노드가 없습니다.\n");
      else if ((*phead)->vertex == item) {
           p = *phead;
           *phead = (*phead)->link;
@@ -59,20 +57,17 @@ void remove_node(GraphNode **phead, element item) { // 4¿Â ∏ÆΩ∫∆Æø°
                free(p);
           }
           else
-               printf("%d¿∫ ∏ÆΩ∫∆Æø° æ¯¿Ω\n", item);
+               printf("%d 에러 \n", item);
      }
 }
-// ∞£º± ªË¡¶ ø¨ªÍ, v∏¶ u¿« ¿Œ¡¢ ∏ÆΩ∫∆Æø°º≠ ªË¡¶«—¥Ÿ.
 void delete_edge(GraphType *g, int u, int v)
 {
     GraphNode *node;
     if( u >= g->n || v >= g->n ){
-        fprintf(stderr, "±◊∑°«¡: ¡§¡° π¯»£ ø¿∑˘");
+        fprintf(stderr, "그래프 : 정점 번호 에러");
         return;
     }
 
-     // ƒ⁄µÂ ª¿‘
-     // (u, v)∏¶ ªË¡¶«—¥Ÿ. remove_node∏¶ ªÁøÎ.
 }
 
 void read_graph(GraphType *g, char *filename)
@@ -86,8 +81,6 @@ void read_graph(GraphType *g, char *filename)
         printf("file open error!\n");
         return;
     }
-
-     // ƒ⁄µÂ ª¿‘
 
      fclose(fp);
 }
@@ -108,8 +101,6 @@ void write_graph(GraphType *g, char *filename)
               return;
          }
      }
-
-     // ƒ⁄µÂ ª¿‘
 
      if (filename != NULL) fclose(fp);
 }

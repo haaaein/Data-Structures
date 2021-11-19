@@ -53,7 +53,7 @@ element delete_max_heap(HeapType* h)
 void preorder1(HeapType *h, int root)
 {
      if (h->heap_size < root)
-     return;
+         return;
      else {
          printf("%d ", h->heap[root].key);
          preorder1(h, root*2);
@@ -77,42 +77,54 @@ void print_sorted_value(HeapType h) //delete_max_heap 사용
 {
     int i = 1;
     
-    for (i = 1; i <= h.heap_size; i++)
+    for (i = h.heap_size; i > 0; i--)
         printf("%d ", delete_max_heap(&h).key);
+    printf("\n");
 }
 
 void modify_priority(HeapType *h, int oldkey, int newkey)
 {
-    int i;
-    HeapType *temp = (HeapType*)malloc(sizeof(HeapType));
-
-    for (i = 1; i <= h->heap_size; i++)
-        if (h->heap[i].key == oldkey)
-            oldkey = newkey;
+    int i, child;
     
-    init(temp);
-    for (i = h->heap_size; i >= 1; i--)
-        insert_max_heap(temp, h->heap[i]);
+    if (oldkey == newkey) return;
+    i = find(h, 1, oldkey);
+    if (i == 0) return; //fail to find oldkey
     
-    for (i = 1; i <= h->heap_size; i++)
-        h->heap[i] = delete_max_heap(temp);
-    
-    free(temp);
+    if (newkey > oldkey) { //level up
+        //insert_max_heap()의 코드와 유사
+        while ((i != 1) && newkey > h->heap[i / 2].key) {
+            h->heap[i] = h->heap[i / 2];
+            i /= 2;
+        }
+        h->heap[i].key = newkey;
+    }
+    else { //newkey < oldkey; level down
+        //delete_max_heap()의 코드와 유사
+        child = i * 2;
+        //코드작성
+        while (child <= h->heap_size) {
+            if (child < h->heap_size && h->heap[child].key)
+                child++;
+            if (newkey >= h->heap[child].key)
+                break;
+            h->heap[i] = h->heap[child];
+            i = child;
+            child *= 2;
+        }
+    }
 }
 
 void print_heap(HeapType *h)
 {
-    int i, count = 1;
-    double height = 1;
+    int s, i;
     
-    for (i = 1; i <= h->heap_size; i++) {
-        printf("%d ", h->heap[i].key);
-        if (pow(2, height - 1.0) == count) {
-            height++;
-            count = 0;
-            printf("\n");
+    for (s = 1; s <= h->heap_size; s *= 2) {
+        for (i = s; i < s * 2; i++) {
+            if (i > h->heap_size)
+                break;
+            printf("%d ", h->heap[i].key);
         }
-        count++;
+        printf("\n");
     }
 }
 
