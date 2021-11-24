@@ -3,7 +3,7 @@
 #define TRUE 1;
 #define FALSE 0;
 
-int visited[MAX_VERTICES][MAX_VERTICES]; // 전역변수는 0 으로 자동 초기화
+int visited[MAX_VERTICES][MAX_VERTICES];
 
 typedef struct GraphType {
      int n;
@@ -51,7 +51,7 @@ void delete_edge(GraphType *g, int start, int end)
 //
 void read_graph(GraphType *g, char *filename)
 {
-    int number = 0, u, v;
+    int u, v;
     FILE *fp;
     fp = fopen(filename, "rt");
     
@@ -61,12 +61,11 @@ void read_graph(GraphType *g, char *filename)
         return;
     }
     
-    fscanf(fp, "%d", &number);
-    for (int i = 0; i < number; i++)
-        insert_vertex(g, i);
-    
-    while (fscanf(fp, "%d %d", &u, &v) != EOF)
-        insert_edge(g, u, v);
+    else {
+        fscanf(fp, "%d", &g->n);
+        while ((fscanf(fp, "%d %d", &u, &v)) != EOF)
+            insert_edge(g, u, v);
+    }
     
     fclose(fp);
 }
@@ -90,24 +89,14 @@ void write_graph(GraphType *g, char *filename)
     
     fprintf(fp, "%d\n", g->n);
     for (i = 0; i < g->n; i++) {
-        for (j = 0; j < g->n; j++) {
-            if (g->adj_mat[i][j] == 1 && g->adj_mat[j][i] == 1 && visited[i][j] == 0) {
+        for (j = i; j < g->n; j++) {
+            if (g->adj_mat[i][j] == 1) {
                 fprintf(fp, "%d %d\n", i, j);
-                visited[i][j] = 1;
-                visited[j][i] = 1;
             }
         }
     }
     
     if (filename != NULL) fclose(fp);
-}
-
-void visited_init()
-{
-    int i, j;
-    for (i = 0; i < MAX_VERTICES; i++)
-        for (j = 0; j < MAX_VERTICES; j++)
-            visited[i][j] = 0;
 }
 
 int main(void)
@@ -117,21 +106,17 @@ int main(void)
     read_graph(&g, "input.txt");
     printf("정점의 개수 %d\n", g.n);
     printf("--1--\n\n");
-    visited_init();
     write_graph(&g, NULL);    // to stdout
 
     printf("--2--\n\n");
     insert_edge(&g, 1, 3);
-    visited_init();
     write_graph(&g, NULL);    // to stdout
 
     printf("--3--\n\n");
     delete_edge(&g, 2, 0);
-    visited_init();
     write_graph(&g, NULL);    // to stdout
 
     printf("--4--\n\n");
-    visited_init();
     write_graph(&g, "output.txt");
 }
 

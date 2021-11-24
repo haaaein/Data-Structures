@@ -82,36 +82,42 @@ void print_sorted_value(HeapType h) //delete_max_heap 사용
     printf("\n");
 }
 
-void modify_priority(HeapType *h, int oldkey, int newkey)
+void modify_priority(HeapType* h, int oldkey, int newkey)
 {
-    int i, child;
-    
-    if (oldkey == newkey) return;
-    i = find(h, 1, oldkey);
-    if (i == 0) return; //fail to find oldkey
-    
-    if (newkey > oldkey) { //level up
-        //insert_max_heap()의 코드와 유사
-        while ((i != 1) && newkey > h->heap[i / 2].key) {
-            h->heap[i] = h->heap[i / 2];
-            i /= 2;
-        }
-        h->heap[i].key = newkey;
-    }
-    else { //newkey < oldkey; level down
-        //delete_max_heap()의 코드와 유사
-        child = i * 2;
-        //코드작성
-        while (child <= h->heap_size) {
-            if (child < h->heap_size && h->heap[child].key)
-                child++;
-            if (newkey >= h->heap[child].key)
-                break;
-            h->heap[i] = h->heap[child];
-            i = child;
-            child *= 2;
-        }
-    }
+   int i;
+   for (i = 1; i <= h->heap_size; i++) {
+      if (h->heap[i].key == oldkey) {
+         h->heap[i].key = newkey;
+         break;
+      }
+   }
+   element item = h->heap[i];
+   if (i != 1 && h->heap[i].key >= h->heap[i / 2].key) //본인이 부모보다 클 때
+   {
+      while ((i != 1) && (item.key > h->heap[i / 2].key)) {
+         h->heap[i] = h->heap[i / 2];
+         i /= 2;
+      }
+      h->heap[i] = item;
+   }
+   else  //본인이 자식보다 작을 때
+   {
+      int parent, child;
+      parent = i;
+      child = i * 2;
+      while (child <= h->heap_size) {
+         // 현재 노드의 자식노드중 더 큰 자식노드를 찾는다.
+         if ((child < h->heap_size) &&
+            (h->heap[child].key) < h->heap[child + 1].key)
+            child++;
+         if (item.key >= h->heap[child].key) break;
+         // 한단계 아래로 이동
+         h->heap[parent] = h->heap[child];
+         parent = child;
+         child *= 2;
+      }
+      h->heap[parent] = item;
+   }
 }
 
 void print_heap(HeapType *h)

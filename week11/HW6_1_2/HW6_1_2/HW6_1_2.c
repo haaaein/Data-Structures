@@ -22,18 +22,35 @@ void graph_init(GraphType *g)
         g->adj_list[v]=NULL;
 }
 
+void insert_vertex(GraphType *g, int v)
+{
+    if ((g->n) + 1 > MAX_VERTICES) {
+        fprintf(stderr, "그래프 : 정점의 개수 초과");
+        return;
+    }
+    g->n++;
+}
+
 void insert_edge(GraphType *g, int u, int v)
 {
-    GraphNode *node_u, *node_v;
+    GraphNode *node;
     if( u >= g->n || v >= g->n ){
         fprintf(stderr, "그래프 : 정점 번호 오류");
         return;
     }
-    node_u = (GraphNode *)malloc(sizeof(GraphNode));
-    if (node_u == NULL) {
+    node = (GraphNode *)malloc(sizeof(GraphNode));
+    if (node == NULL) {
         fprintf(stderr, "에러!\n"); return;
     }
-     
+    
+    node = (GraphNode *)malloc(sizeof(GraphNode));
+    node->vertex = v;
+    node->link = g->adj_list[u];
+    g->adj_list[u] = node;
+    
+    node->vertex = u;
+    node->link = g->adj_list[v];
+    g->adj_list[v] = node;
 }
 
 void remove_node(GraphNode **phead, element item) {
@@ -57,23 +74,24 @@ void remove_node(GraphNode **phead, element item) {
                free(p);
           }
           else
-               printf("%d 에러 \n", item);
+               printf("%d은 리스트에 없음 \n", item);
      }
 }
+
 void delete_edge(GraphType *g, int u, int v)
 {
-    GraphNode *node;
     if( u >= g->n || v >= g->n ){
         fprintf(stderr, "그래프 : 정점 번호 에러");
         return;
     }
 
+    remove_node(&g->adj_list[u], v);
+    remove_node(&g->adj_list[v], u);
 }
 
 void read_graph(GraphType *g, char *filename)
 {
      int number, u, v;
-     GraphNode *node;
      FILE *fp;
      fp = fopen(filename, "rt");
     if (fp == NULL)
@@ -82,6 +100,11 @@ void read_graph(GraphType *g, char *filename)
         return;
     }
 
+    fscanf(fp, "%d\n", &number);
+    g->n = number;
+    while (fscanf(fp, "%d %d\n", &u, &v) != EOF)
+        insert_edge(g, u, v);
+    
      fclose(fp);
 }
 
@@ -102,6 +125,11 @@ void write_graph(GraphType *g, char *filename)
          }
      }
 
+    fprintf(fp, "%d\n", g->n);
+    for (u = 0; u < g->n; u++)
+        for (ptr = g->adj_list[u]; ptr != NULL; ptr = ptr->link)
+            fprintf(fp, "%d %d\n", u, ptr->vertex);
+    
      if (filename != NULL) fclose(fp);
 }
 
@@ -113,10 +141,12 @@ int main(void)
     read_graph(&g, "input.txt");
     write_graph(&g, NULL);    // to stdout
 
+    printf("\n");
     insert_edge(&g, 1, 3);
     write_graph(&g, NULL);    // to stdout
 
-    delete_edge(&g, 2, 0);
+    printf("\n");
+    delete_edge(&g, 3, 0);
     write_graph(&g, NULL);    // to stdout
 
     write_graph(&g, "output.txt");

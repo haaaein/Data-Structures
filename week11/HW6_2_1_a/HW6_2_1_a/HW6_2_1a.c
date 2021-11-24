@@ -71,6 +71,7 @@ void dfs_mat(GraphType *g, int v)
             dfs_mat(g, w);
         }
 }
+
 int main(void)
 {
      GraphType graph;

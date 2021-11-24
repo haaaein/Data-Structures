@@ -66,7 +66,6 @@ void bfs_list(GraphType *g, int v)
         for(w=g->adj_list[v]; w; w = w->link)
               if(!visited[w->vertex]){
                     visited[w->vertex] = TRUE;
-                    
                     enqueue(&q, w->vertex);
                   printf("<%d %d>\n", v, w->vertex);
               }
@@ -77,9 +76,12 @@ void dfs_list(GraphType *g, int v)
 {
     GraphNode *w;
     visited[v] = TRUE;
+    
     for (w = g->adj_list[v]; w != NULL; w = w->link)
-        if (!visited[w->vertex])
+        if (!visited[w->vertex]) {
+            printf("<%d %d>\n", v, w->vertex);
             dfs_list(g, w->vertex);
+        }
 }
 
 void read_graph(GraphType *g, char *filename)
@@ -94,12 +96,14 @@ void read_graph(GraphType *g, char *filename)
         return;
     }
     
-    fscanf(fp, "%d", &number);
+    fscanf(fp, "%d\n", &number);
     for (int i = 0; i < number; i++)
         insert_vertex(g, i);
     
-    while (fscanf(fp, "%d %d", &u, &v) != EOF)
+    while (fscanf(fp, "%d %d\n", &u, &v) != EOF) {
         insert_edge(g, u, v);
+        insert_edge(g, v, u);
+    }
     
     fclose(fp);
 }
@@ -115,5 +119,5 @@ int main(void)
      printf("Enter 정점:");
      scanf("%d", &v);
      
-     bfs_list(&graph, v);
+     dfs_list(&graph, v);
 }
