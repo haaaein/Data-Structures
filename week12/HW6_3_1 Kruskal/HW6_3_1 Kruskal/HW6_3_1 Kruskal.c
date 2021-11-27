@@ -36,8 +36,10 @@ void read_graph(GraphType *g, char *filename)
 
     fscanf(fp, "%d\n", &number);
     g->n = number;
-    while (fscanf(fp, "%d %d %d\n", &u, &v, &w) != EOF)
+    while (fscanf(fp, "%d %d %d\n", &u, &v, &w) != EOF) {
         g->adj_mat[u][v] = w;
+        g->adj_mat[u][v] = w;
+    }
    
     fclose(fp);
 }
@@ -101,7 +103,7 @@ void kruskal(GraphType *g, GraphType *t)
     
     init(&h);
     insert_all_edges(&h, g);
-    set_init(g->n); 
+    set_init(g->n);
 
     printf("선택된 간선<순서대로>:\n");
     while (edge_accepted < (g->n - 1)) {

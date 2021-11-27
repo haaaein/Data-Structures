@@ -6,15 +6,16 @@
 #define MAX_VERTICES 100
 #define INF 1000L
 
+int connectedVertex[MAX_VERTICES];
+
 typedef struct GraphType {
-    int n;    // 정점의 개수
+    int n;
     int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
 int selected[MAX_VERTICES];
 int distance[MAX_VERTICES];
 
-// 최소 dist[v] 값을 갖는 정점을 반환
 int get_min_vertex(int n)
 {
     int v, i;
@@ -39,14 +40,18 @@ void prim(GraphType* g, int s)
         u = get_min_vertex(g->n);
         selected[u] = TRUE;
         if (distance[u] == INF) return;
-        //printf("정점 %d 추가\n", u);
         
         for (v = 0; v<g->n; v++) {
             if (g->weight[u][v] != INF)
-                if (!selected[v] && g->weight[u][v]< distance[v])
+                if (!selected[v] && g->weight[u][v]< distance[v]) {
                     distance[v] = g->weight[u][v];
+                    connectedVertex[v] = u;
+                    //printf("<%d %d> %d\n", u, connectedVertex[v], distance[v]);
+                }
         }
+        
         printf("\n%d 선택\n", i);
+        
         printf("selected[] = \t");
         for (j = 0; j < g->n; j++)
             printf("%5d ", selected[j]);
