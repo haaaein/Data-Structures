@@ -52,7 +52,7 @@ void prim(GraphType* g, int s)
                 }
         }
         
-        printf("\n<%d %d> %d\n", connectedVertex[u], u, g->weight[connectedVertex[u]][u]);
+        printf("\n<%d %d> %d\n", connectedVertex[u], u, distance[u]);
         printf("selected[] = \t");
         for (j = 0; j < g->n; j++)
             printf("%5d ", selected[j]);
