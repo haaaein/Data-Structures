@@ -15,6 +15,7 @@ typedef struct GraphType {
 
 int selected[MAX_VERTICES];
 int distance[MAX_VERTICES];
+int connectedVertex[MAX_VERTICES];
 
 int get_min_vertex(int n)
 {
@@ -46,12 +47,10 @@ void prim(GraphType* g, int s)
                 if (!selected[v] && g->weight[u][v]< distance[v]) {
                     distance[v] = g->weight[u][v];
                     connectedVertex[v] = u;
-                    //printf("<%d %d> %d\n", u, connectedVertex[v], distance[v]);
                 }
         }
         
-        printf("\n%d 선택\n", i);
-        
+        printf("\n<%d %d> %d\n", connectedVertex[u], u, g->weight[connectedVertex[u]][u]);
         printf("selected[] = \t");
         for (j = 0; j < g->n; j++)
             printf("%5d ", selected[j]);
