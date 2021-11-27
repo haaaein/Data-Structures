@@ -19,7 +19,7 @@ int connectedVertex[MAX_VERTICES];
 
 int get_min_vertex(int n)
 {
-    int v, i;
+    int v = 0, i;
     for (i = 0; i <n; i++)
         if (!selected[i]) {
             v = i;
@@ -34,8 +34,10 @@ void prim(GraphType* g, int s)
 {
     int i, u, v, j;
 
-    for (u = 0; u<g->n; u++)
+    for (u = 0; u<g->n; u++) {
         distance[u] = INF;
+        connectedVertex[u] = s;
+    }
     distance[s] = 0;
     for (i = 0; i < g->n; i++) {
         u = get_min_vertex(g->n);
