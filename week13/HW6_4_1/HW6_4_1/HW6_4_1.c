@@ -4,15 +4,15 @@
 #define TRUE 1
 #define FALSE 0
 #define MAX_VERTICES 100
-#define INF 1000000 /* 무한대 (연결이 없는 경우) */
+#define INF 1000000
 
 typedef struct GraphType {
-int n; // 정점의 개수
+int n;
 int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
-int distance[MAX_VERTICES];/* 시작정점으로부터의 최단경로 거리 */
-int found[MAX_VERTICES]; /* 방문한 정점 표시 */
+int distance[MAX_VERTICES];
+int found[MAX_VERTICES];
 int previous[MAX_VERTICES];
 
 
@@ -97,12 +97,12 @@ void print_path(int start, int end)
 {
     int u = end;
     if (start == end) {
-        printf("%d -> ", start);
+        printf("%d ", start);
         return;
     }
     else {
         print_path(start, previous[u]);
-        printf("%d -> ", u);
+        printf("-> %d ", u);
     }
     
 }
@@ -111,14 +111,14 @@ void shortest_path(GraphType* g, int start)
 {
     int i, u, v;
     
-    for (i = 0; i<g->n; i++) /* 초기화 */
+    for (i = 0; i<g->n; i++) 
     {
         distance[i] = g->weight[start][i];
         found[i] = FALSE;
         previous[i] = start;
     }
     
-    found[start] = TRUE; /* 시작 정점 방문 표시 */
+    found[start] = TRUE;
     distance[start] = 0;
     
     for (i = 0; i<g->n-1; i++) {
